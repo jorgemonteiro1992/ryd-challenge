@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="cheap-gas container display--flex flex--center">
         content
     </div>
 </template>
@@ -7,5 +7,5 @@
 <script setup>
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 </style>

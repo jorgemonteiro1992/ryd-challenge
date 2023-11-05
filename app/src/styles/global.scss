@@ -1,0 +1,143 @@
+// =============================================================================
+// Imports
+// =============================================================================
+@import '@/styles/utils/_reset';
+
+// =============================================================================
+// Global style
+// =============================================================================
+html,
+body {
+    @include dimensions( 100%, 100% );
+    font-family: 'Verdana', sans-serif;
+    @include typography-specs( 18px, 28px, 300 );
+}
+
+body {
+    @include elements-colors( $color-blue, $color-white );
+    overflow-x: hidden;
+}
+
+::selection { // altera a cor de selecção
+    background: $color-blue;
+    color: $color-white;
+}
+
+::-moz-selection {
+    background: $color-blue;
+    color: $color-white;
+}
+
+// =============================================================================
+// General Classes - positions and displays
+// =============================================================================
+.position {
+    &--relative {
+        position: relative;
+    }
+    &--absolute {
+        position: absolute;
+    }
+    &--fixed {
+        position: fixed;
+    }
+}
+
+.display {
+    &--flex {
+        display: flex;
+    }
+    &--grid {
+        display: grid;
+    }
+    &--block {
+        display: block;
+    }
+    &--inline-b {
+        display: inline-block;
+    }
+    &--none {
+        display: none;
+    }
+}
+
+.flex {
+    &--center {
+        @include position-grid( center, center );
+    }
+}
+
+// =============================================================================
+// General classes - backgrounds and colors
+// =============================================================================
+.background {
+    &--white {
+        background: $color-white;
+    }
+    &--blue {
+        background: $color-blue;
+    }
+    &--black {
+        background: $color-black;
+    }
+}
+
+.color {
+    &--black {
+        color: $color-black;
+    }
+    &--white {
+        color: $color-white;
+    }
+    &--red {
+        color: $color-blue;
+    }
+}
+
+// =============================================================================
+// General classes - typography
+// =============================================================================
+.capitalize::first-letter {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+// =============================================================================
+// General Classes - cursors
+// =============================================================================
+.pointer {
+    cursor: pointer;
+}
+
+.grab {
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.disable {
+    cursor: no-drop;
+    pointer-events: none;
+}
+
+// =============================================================================
+// General Classes - overflows
+// =============================================================================
+.overflow {
+    &--hidden {
+        overflow: hidden;
+    }
+}
+
+// =============================================================================
+// Containers
+// =============================================================================
+.container {
+    padding: 55px 130px 230px;
+    @include responsive( max-width, 768px ) {
+        padding: 30px 15px 100px;
+    }
+}

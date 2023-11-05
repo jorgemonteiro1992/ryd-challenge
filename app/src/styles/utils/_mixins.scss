@@ -1,0 +1,191 @@
+// =============================================================================
+// Typography
+// =============================================================================
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+	$initialPath: '@/assets/fonts/';
+
+	$extmods: (
+		eot: '?',
+		svg: '#' + str-replace($name, ' ', '_')
+	);
+
+	$formats: (
+		otf: 'opentype',
+		ttf: 'truetype'
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url( $initialPath + quote($path + '.' + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+
+@mixin typography-specs( $size, $height, $weight: false ) {
+    font-size: $size;
+    line-height: $height;
+    @if $weight {
+        font-weight: $weight;
+    }
+}
+
+@mixin sentence-case() {
+    text-transform: lowercase;
+    &:first-letter {
+        text-transform: uppercase;
+    }
+}
+
+// =============================================================================
+// Dimensions
+// =============================================================================
+@mixin dimensions($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// =============================================================================
+// Border
+// =============================================================================
+@mixin element-border($color, $width: 1px, $style: solid) {
+    border: {
+        color: $color;
+        width: $width;
+        style: $style;
+    }
+}
+
+// =============================================================================
+// Rounded corner
+// =============================================================================
+@mixin rounded-corner($arc) {
+    border-radius: $arc;
+    -ms-border-radius: $arc;
+    -o-border-radius: $arc;
+}
+
+
+// =============================================================================
+// Elements colors
+// =============================================================================
+@mixin elements-colors ($element-background, $element-color) {
+    background: $element-background;
+    color: $element-color;
+}
+
+// =============================================================================
+// Placelhoder
+// =============================================================================
+@mixin placeholder {
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+}
+
+// =============================================================================
+// Shadow
+// =============================================================================
+@mixin box-shadow($shadows...) {
+    -moz-box-shadow: $shadows;
+    -webkit-box-shadow: $shadows;
+    box-shadow: $shadows;
+}
+
+// =============================================================================
+// Position flex/grid
+// =============================================================================
+@mixin position-grid($align, $justify: normal) {
+    align-items: $align;
+    justify-content: $justify;
+}
+
+
+// =============================================================================
+// Pseudo element
+// =============================================================================
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+// =============================================================================
+// Transition
+// =============================================================================
+@mixin transition($transition...) {
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+}
+
+// =============================================================================
+// Transform
+// =============================================================================
+@mixin transform($transform...) {
+    transform: $transform;
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+}
+
+@mixin transform-position ($top, $right, $bottom, $left, $haveTransform: false) {
+    @if $top { top: $top; }
+    @if $right { right: $right; }
+    @if $bottom { bottom: $bottom; }
+    @if $left { left: $left; }
+    @if $haveTransform {
+        @include transform($haveTransform);
+    }
+}
+
+// =============================================================================
+// Animations
+// =============================================================================
+@mixin animation ($animation) {
+    animation: $animation;
+    -webkit-animation: $animation;
+}
+
+@mixin keyframes ($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+// =============================================================================
+// Background-image
+// =============================================================================
+@mixin background-proprieties ( $size: cover, $repeat: no-repeat, $position: center center ) {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+// =============================================================================
+// Responsivo
+// =============================================================================
+@mixin responsive ( $query, $value ) {
+    @media ( $query: $value ) {
+        @content;
+    }
+}
