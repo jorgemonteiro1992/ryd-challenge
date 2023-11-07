@@ -1,0 +1,12 @@
+.p-dropdown {
+    @include dimensions ( 250px, 35px );
+    line-height: 35px;
+    border: 1px solid $color-white;
+    @include rounded-corner( 5px );
+    padding: 0 8px;
+    color: $color-white;
+}
+
+.p-dropdown-panel {
+    margin-top: 10px;
+}

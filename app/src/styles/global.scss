@@ -10,7 +10,7 @@ html,
 body {
     @include dimensions( 100%, 100% );
     font-family: 'Verdana', sans-serif;
-    @include typography-specs( 18px, 28px, 300 );
+    @include typography-specs( 14px, 18px, 300 );
 }
 
 body {
@@ -137,6 +137,15 @@ body {
 // =============================================================================
 .container {
     padding: 55px 130px 230px;
+    @include responsive( max-width, 1600px ) {
+        padding: 40px 80px 180px;
+    }
+    @include responsive( max-width, 1280px ) {
+        padding: 35px 50px 140px;
+    }
+    @include responsive( max-width, 1024px ) {
+        padding: 30px 30px 120px;
+    }
     @include responsive( max-width, 768px ) {
         padding: 30px 15px 100px;
     }
