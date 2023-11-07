@@ -55,6 +55,9 @@ const hideStation = computed( () => {
         padding: 15px 10px;
         @include element-border( $color-white );
         @include rounded-corner( 5px );
+        &:first-of-type {
+            background-color: $color-green;
+        }
         &__header {
             padding-bottom: 10px;
             border-bottom: solid 1px $color-white;

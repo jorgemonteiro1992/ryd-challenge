@@ -10,3 +10,14 @@
 .p-dropdown-panel {
     margin-top: 10px;
 }
+
+@include responsive( 'max-width', 767px ) {
+    .p-dropdown {
+        width: 185px;
+    }
+}
+@include responsive( 'max-width', 450px ) {
+    .p-dropdown {
+        width: 100%;
+    }
+}
