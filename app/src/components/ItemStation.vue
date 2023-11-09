@@ -15,14 +15,27 @@
             </div>
         </div>
         <div class="station__body display--flex">
+            <span class="station__body__address capitalize display--block">{{ address }}</span>
             <span class="station__body__distance capitalize display--block">distance: {{ distance }}</span>
             <span class="station__body__price capitalize display--block">price: {{ station.price }}</span>
+        </div>
+        <div class="station__actions">
+            <div class="station__actions__copy-address position--relative display--inline-b">
+                <button-copy-text
+                    :text-to-copy="address"
+                    button-text="Share address"
+                    popover-text="Address copied"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { toRefs, computed } from 'vue';
+import { toRefs, computed, defineAsyncComponent } from 'vue';
+
+// Components
+const buttonCopyText = defineAsyncComponent( () => import( '@/components/buttons/ButtonCopyText.vue' ) );
 
 // Props
 const props = defineProps({
@@ -38,11 +51,25 @@ const distance = computed( () => `${ station.value.dist } km` ); // returns dist
  * 
  * A station will be hidden if:
  * - the filter 'show open stations' is checked but the station is closed
- * - the filter 'brand' is different than null and if filter.brand is different from station.brand 
+ * - the filter 'brand' is different than null and if filter.brand is different from station.brand
+ * - the station has no price for a specific fuel type
  */
 const hideStation = computed( () => {
     return ( ( filters.value?.onlyOpenStations && !station.value?.isOpen ) || 
-            ( filters.value?.brand?.name !== 'Any' && filters.value?.brand?.name.toLowerCase() !== station.value?.brand.toLowerCase() ) );
+            ( filters.value?.brand?.name !== 'Any' && filters.value?.brand?.name.toLowerCase() !== station.value?.brand.toLowerCase() ) ||
+            !station.value.price );
+});
+
+// Builds and returns the address of the station.
+const address = computed( () => {
+    const addressArray = [];
+
+    if ( station.value.street ) addressArray.push( station.value.street ); 
+    if ( station.value.houseNumber ) addressArray.push( `${station.value.houseNumber},` ); 
+    if ( station.value.postCode ) addressArray.push( `${station.value.postCode}` ); 
+    if ( station.value.place ) addressArray.push( `${station.value.place}` ); 
+
+    return addressArray.join( ' ' );
 });
 </script>
 
@@ -74,9 +101,25 @@ const hideStation = computed( () => {
             }
         }
         &__body {
+            flex-wrap: wrap;
+            gap: 15px;
             @include position-grid( center, space-between );
             padding-top: 15px;
             @include typography-specs( inherit, inherit, 400 );
+            &__address {
+                width: 100%;
+            }
+            &__distance {
+                width: calc( 60% - 10px );
+            }
+            &__price {
+                width: calc( 40% - 10px );
+                text-align: right;
+            }
+        }
+        &__actions {
+            margin-top: 15px;
+            text-align: right;
         }
     }
 </style>
