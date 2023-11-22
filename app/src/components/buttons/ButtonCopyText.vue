@@ -57,7 +57,7 @@ const copyToClipboard = textToCopy => {
             showPopoverMessage.value = true;
 
             setTimeout( () => {
-                showPopoverMessage.value = true;
+                showPopoverMessage.value = false;
             }, 2000 ); // Hide popover after 2 seconds
         });
 };
