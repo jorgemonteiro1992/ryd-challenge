@@ -51,7 +51,7 @@ const distance = computed( () => `${ station.value.dist } km` ); // returns dist
  * 
  * A station will be hidden if:
  * - the filter 'show open stations' is checked but the station is closed
- * - the filter 'brand' is different than null and if filter.brand is different from station.brand
+ * - the option 'Any' is not selected in the filter 'brand' and if filter.brand is different from station.brand
  * - the station has no price for a specific fuel type
  */
 const hideStation = computed( () => {
@@ -64,6 +64,7 @@ const hideStation = computed( () => {
 const address = computed( () => {
     const addressArray = [];
 
+    // TODO: change this to use a forEach instead of endless if statements
     if ( station.value.street ) addressArray.push( station.value.street ); 
     if ( station.value.houseNumber ) addressArray.push( `${station.value.houseNumber},` ); 
     if ( station.value.postCode ) addressArray.push( `${station.value.postCode}` ); 

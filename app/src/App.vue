@@ -111,8 +111,8 @@ const fetchStations = ({ request }) => {
     const url = `${request.baseUrl}${request.endpoint}?${objectToQueryString( request.params )}`;
 
     /**
-     * Requests stations to API based on the parameters provided
-     * In case on sucess, saves the response request.response and the list in stations.list
+     * Requests stations from API based on the parameters provided
+     * In case of sucess, saves the response request.response and the list in stations.list
      * In case of failure, saves the response in request.errors
      * 
      */
